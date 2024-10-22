@@ -41,7 +41,7 @@ pub fn load_repository(path : &std::path::Path) -> Result<git2::Repository, GitE
 	}
 }
 
-pub fn fetch_updates(repo : &Repository) -> Result<(), GitError> {
+fn fetch_updates(repo : &Repository) -> Result<(), GitError> {
 	let mut callbacks = git2::RemoteCallbacks::new();
 	callbacks.credentials(|_url, username_from_url, _allowed_types| {
 		git2::Cred::ssh_key(
@@ -65,7 +65,7 @@ pub fn fetch_updates(repo : &Repository) -> Result<(), GitError> {
 	Ok(())
 }
 
-pub fn get_changed_files(repo: &Repository) -> Result<Vec<(git2::Delta, std::path::PathBuf, std::path::PathBuf)>, GitError> {
+fn get_changed_files(repo: &Repository) -> Result<Vec<(git2::Delta, std::path::PathBuf, std::path::PathBuf)>, GitError> {
 	let local = get_tree_by_branch(&repo, "master")?;
 	let remote = get_tree_by_branch(&repo, "origin/master")?;
 	let diff = match repo.diff_tree_to_tree(Some(&local), Some(&remote), Some(&mut git2::DiffOptions::new())) {
@@ -116,18 +116,15 @@ fn remove_newline(s: &mut String) {
 }
 
 
-pub async fn sync_packages() -> Result<(), GitError> {
-	let repo_path = std::path::Path::new("static/repo").to_path_buf();
-	log::info!("{:#?}", repo_path);
+pub async fn sync_packages(repo_path: PathBuf) -> Result<(), GitError> {
 	let repo = load_repository(repo_path.as_path())?;
 	fetch_updates(&repo)?;
 	let _ = get_changed_files(&repo)?;
 	fast_forward(&repo)?;
-
 	Ok(())
 }
 
-pub fn fast_forward(repo : &Repository) -> Result<(), GitError> {
+fn fast_forward(repo : &Repository) -> Result<(), GitError> {
 	let fetch_head = match repo.find_reference("FETCH_HEAD") {
 		Ok(r) => r,
 		Err(e) => return Err(ReferenceNotFound(e))

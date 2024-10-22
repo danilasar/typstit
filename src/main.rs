@@ -1,6 +1,7 @@
 mod cli;
 mod git;
+mod api;
 
 fn main() {
-    println!("Hello, world!");
+    let _ = cli::get_action();
 }
