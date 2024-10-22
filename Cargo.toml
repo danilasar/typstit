@@ -1,0 +1,11 @@
+[package]
+name = "typstit"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+serde = { version = "1.0.210", features = ["derive", "std"] }
+toml = "0.8.19"
+git2 = { version = "0.19.0", features = ["ssh"] }
+md5 = { version = "0.7.0", features = ["std"] }
+typst-syntax = "0.12.0"
