@@ -1,7 +1,10 @@
+use env_logger;
 mod cli;
 mod git;
 mod api;
 
 fn main() {
-    let _ = cli::get_action();
+    env_logger::init();
+    let action = cli::get_action();
+    println!("{:#?}", action);
 }

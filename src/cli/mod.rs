@@ -4,6 +4,8 @@ mod update;
 mod add;
 mod remove;
 mod help;
+mod utils;
+mod info;
 
 use std::collections::HashMap;
 use crate::api::Action;
@@ -34,12 +36,10 @@ pub fn get_action<'a>() -> std::io::Result<Action> {
 		("remove",    Box::new(RemoveCommand)    as Box<dyn Command>),
 		("update",    Box::new(UpdateCommand)    as Box<dyn Command>)
 	]);
-	let mut found = false;
 	for act in actions.iter() {
 		if act.0 != action {
 			continue
 		}
-		found = true;
 		return act.1.execute(args);
 	}
 	println!("Undefined command: {}", &action);

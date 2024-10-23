@@ -11,3 +11,4 @@ md5 = { version = "0.7.0", features = ["std"] }
 typst-syntax = "0.12.0"
 log = "0.4.22"
 ssh2 = "0.9.4"
+env_logger = "0.11.5"

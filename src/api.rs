@@ -1,18 +1,23 @@
+#[derive(Clone, Debug)]
+pub struct PackageName(pub String);
+#[derive(Debug)]
+pub struct PackageNameList(pub Vec<PackageName>);
+#[derive(Debug)]
 pub enum Action {
 	// информация о пакете
-	Info,
+	Info(PackageName),
 	// установить пакет
-	Install,
+	Install(PackageNameList),
 	// обновить пакет
-	Update,
+	Update(PackageNameList),
 	// обновить все пакеты
 	UpdateAll,
-	// добавить пакет в typst документ
-	Add,
-	// убрать пакет из typst документа
-	Remove,
-	// удалить пакет
-	Uninstall,
+	// добавить пакеты в typst документ
+	Add(PackageNameList),
+	// убрать пакеты из typst документа
+	Remove(PackageNameList),
+	// удалить пакеты
+	Uninstall(PackageNameList),
 	// ничего не делать
 	Nothing
 }

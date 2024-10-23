@@ -3,7 +3,7 @@ use crate::cli::Command;
 
 pub struct HelpCommand;
 impl Command for HelpCommand {
-	fn execute(&self, args: Vec<String>) -> std::io::Result<Action> {
+	fn execute(&self, _: Vec<String>) -> std::io::Result<Action> {
 		println!("typstit help - print this help");
 		println!("typstit install <packages> - install packages to local storage");
 		println!("typstit uninstall <packages> - uninstall packages from local storage");
