@@ -3,12 +3,15 @@ mod commands;
 
 use std::collections::HashMap;
 use crate::api::Action;
-use commands::add::AddCommand;
-use commands::install::InstallCommand;
-use commands::remove::RemoveCommand;
-use commands::uninstall::UninstallCommand;
-use commands::update::UpdateCommand;
-use commands::help::HelpCommand;
+use commands::{
+	add::AddCommand,
+	info::InfoCommand,
+	install::InstallCommand,
+	remove::RemoveCommand,
+	uninstall::UninstallCommand,
+	update::UpdateCommand,
+	help::HelpCommand
+};
 //use crate::cli::{Add, Help, Install, Remove, Uninstall, Update};
 
 pub trait Command {
@@ -28,7 +31,8 @@ pub fn get_action<'a>() -> std::io::Result<Action> {
 		("uninstall", Box::new(UninstallCommand) as Box<dyn Command>),
 		("add",       Box::new(AddCommand)       as Box<dyn Command>),
 		("remove",    Box::new(RemoveCommand)    as Box<dyn Command>),
-		("update",    Box::new(UpdateCommand)    as Box<dyn Command>)
+		("update",    Box::new(UpdateCommand)    as Box<dyn Command>),
+		("info",      Box::new(InfoCommand)      as Box<dyn Command>)
 	]);
 	for act in actions.iter() {
 		if act.0 != action {

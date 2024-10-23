@@ -4,4 +4,4 @@ pub mod update;
 pub mod add;
 pub mod remove;
 pub mod help;
-mod info;
+pub mod info;
