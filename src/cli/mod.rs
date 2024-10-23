@@ -1,20 +1,14 @@
-mod install;
-mod uninstall;
-mod update;
-mod add;
-mod remove;
-mod help;
 mod utils;
-mod info;
+mod commands;
 
 use std::collections::HashMap;
 use crate::api::Action;
-use add::AddCommand;
-use install::InstallCommand;
-use remove::RemoveCommand;
-use uninstall::UninstallCommand;
-use update::UpdateCommand;
-use help::HelpCommand;
+use commands::add::AddCommand;
+use commands::install::InstallCommand;
+use commands::remove::RemoveCommand;
+use commands::uninstall::UninstallCommand;
+use commands::update::UpdateCommand;
+use commands::help::HelpCommand;
 //use crate::cli::{Add, Help, Install, Remove, Uninstall, Update};
 
 pub trait Command {
