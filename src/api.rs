@@ -3,7 +3,7 @@ pub struct PackageName(pub String);
 #[derive(Debug)]
 pub struct PackageNameList(pub Vec<PackageName>);
 #[derive(Debug)]
-pub enum Action {
+pub enum Request {
 	// информация о пакете
 	Info(PackageName),
 	// установить пакет
@@ -19,5 +19,9 @@ pub enum Action {
 	// удалить пакеты
 	Uninstall(PackageNameList),
 	// ничего не делать
+	Nothing
+}
+
+pub enum Response {
 	Nothing
 }

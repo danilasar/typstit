@@ -2,7 +2,7 @@ mod utils;
 mod commands;
 
 use std::collections::HashMap;
-use crate::api::Action;
+use crate::api::Request;
 use commands::{
 	add::AddCommand,
 	info::InfoCommand,
@@ -15,10 +15,10 @@ use commands::{
 //use crate::cli::{Add, Help, Install, Remove, Uninstall, Update};
 
 pub trait Command {
-	fn execute(&self, args: Vec<String>) -> std::io::Result<Action>;
+	fn execute(&self, args: Vec<String>) -> std::io::Result<Request>;
 }
 
-pub fn get_action<'a>() -> std::io::Result<Action> {
+pub fn get_action<'a>() -> std::io::Result<Request> {
 	let mut args: Vec<String> = std::env::args().collect();
 	if args.len() < 2 {
 		println!("Please specify a command: typstit <command>");
